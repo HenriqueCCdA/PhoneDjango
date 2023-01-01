@@ -1,6 +1,6 @@
 # Testando o pacote phonenumber_field
 
-Este pacote disponibiliza o `model`, `form` e `serializer`.
+Testando o pacote `phonenumber_field`. Este pacote disponibiliza o `model`, `form`, `serializer` e `validação` para números de telefones internacionais. O pacote utiliza `phonenumbers` outro pacote python. O phonenumbers por sua vez é um port de uma biblioteca do `Google`.
 
 # Forms
 
@@ -14,13 +14,13 @@ O `form` foi testado em uma view no `/`. Onde podemos criar um telefone via `pos
 
 Request:
 
-''' console
+```console
 curl -i -d '{"number":"+552122814364"}' -H "Content-Type: application/json" POST http://localhost:8000/api/phones/
-'''
+```
 
 Response:
 
-```consolse
+```javascript
 {
     "number":"+552122814364"
 }
@@ -30,13 +30,13 @@ Response:
 
 Request:
 
-''' console
+```console
 curl -d '{"number":"value1"}' -H "Content-Type: application/json" POST http://localhost:8000/api/phones/
-'''
+```
 
 Response:
 
-```consolse
+```javascript
 {
     "number":["The phone number entered is not valid."]
 }
@@ -49,13 +49,13 @@ Response:
 
 Request:
 
-''' console
+```console
 curl -i -X GET http://localhost:8000/api/phones/
-'''
+```
 
 Response:
 
-```consolse
+```javascript
 [
     {
         "id":12,
