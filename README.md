@@ -65,6 +65,7 @@ Response:
         "id":16,
         "number":"+552122814365"
     },
+]
 ```
 
 ## Deletando Telefone
