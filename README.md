@@ -1,0 +1,74 @@
+# Testando o pacote phonenumber_field
+
+Este pacote disponibiliza o `model`, `form` e `serializer`.
+
+# Forms
+
+O `form` foi testado em uma view no `/`. Onde podemos criar um telefone via `post`. A view também lista os telefonos no banco de dados.
+
+# API
+
+## Criando Telefone
+
+> Telefone válido
+
+Request:
+
+''' console
+curl -i -d '{"number":"+552122814364"}' -H "Content-Type: application/json" POST http://localhost:8000/api/phones/
+'''
+
+Response:
+
+```consolse
+{
+    "number":"+552122814364"
+}
+```
+
+> Telefone inválido
+
+Request:
+
+''' console
+curl -d '{"number":"value1"}' -H "Content-Type: application/json" POST http://localhost:8000/api/phones/
+'''
+
+Response:
+
+```consolse
+{
+    "number":["The phone number entered is not valid."]
+}
+```
+
+
+## Listando Telefones
+
+> Listando os telefone
+
+Request:
+
+''' console
+curl -i -X GET http://localhost:8000/api/phones/
+'''
+
+Response:
+
+```consolse
+[
+    {
+        "id":12,
+        "number":"+552122814365"
+    },
+    {
+        "id":16,
+        "number":"+552122814365"
+    },
+```
+
+## Deletando Telefone
+
+```console
+curl -i -X DELETE http://localhost:8000/api/phones/12/
+```

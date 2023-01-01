@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-color:#93a1a1;border-spacing:0;}
+        .tg td{background-color:#fdf6e3;border-color:#93a1a1;border-style:solid;border-width:1px;color:#002b36;
+          font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{background-color:#657b83;border-color:#93a1a1;border-style:solid;border-width:1px;color:#fdf6e3;
+          font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-0lax{text-align:left;vertical-align:top}
+    </style>
+    <title>Phone</title>
+</head>
+<body>
+    {%if  phones %}
+    <div>
+        <table class="tg">
+            <thead>
+                <tr>
+                    <th class="tg-0lax">id</th>
+                    <th class="tg-0lax">Default</th>
+                    <th class="tg-0lax">E164</th>
+                    <th class="tg-0lax">International</th>
+                    <th class="tg-0lax">National</th>
+                    <th class="tg-0lax">RFC3966</th>
+                    <th class="tg-0lax">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in phones %}
+                <tr>
+                    <td class="tg-0lax">{{p.id}}</td>
+                    <td class="tg-0lax">{{p}}</td>
+                    <td class="tg-0lax">{{p.number.as_e164}}</td>
+                    <td class="tg-0lax">{{p.number.as_international}}</td>
+                    <td class="tg-0lax">{{p.number.as_national}}</td>
+                    <td class="tg-0lax">{{p.number.as_rfc3966}}</td>
+                    <td class="tg-0lax">
+                        <form method="post" action="{% url 'delete-form' pk=p.id %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {%endif%}
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                {{ form.number.label_tag }}
+                {{ form.number }}
+                {{ form.number.errors }}
+            </div>
+            <input type="submit" value="Ok">
+        </form>
+    </div>
+</body>
+</html>
